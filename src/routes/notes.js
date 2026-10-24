@@ -1,4 +1,5 @@
 import { Router } from "express";
+import mongoose from "mongoose";
 import Note from "../models/Note.js";
 import { requireAuth } from "../middleware/auth.js";
 
@@ -39,6 +40,43 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   const notes = await Note.find({ user: req.userId }).sort({ createdAt: -1 });
   res.json(notes);
+});
+
+// Comprueba que el :id de la URL tenga forma de id de MongoDB
+function checkId(req, res, next) {
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return res.status(400).json({ message: "El identificador no es válido" });
+  }
+  next();
+}
+
+// GET /api/notes/:id  → ver una nota mía
+router.get("/:id", checkId, async (req, res) => {
+  const note = await Note.findOne({ _id: req.params.id, user: req.userId });
+  if (!note) return res.status(404).json({ message: "Nota no encontrada" });
+  res.json(note);
+});
+
+// PUT /api/notes/:id  → modificar una nota mía
+router.put("/:id", checkId, async (req, res) => {
+  const error = validateNote(req.body);
+  if (error) return res.status(400).json({ message: error });
+
+  const { title, content } = req.body;
+  const note = await Note.findOneAndUpdate(
+    { _id: req.params.id, user: req.userId },
+    { title, content },
+    { returnDocument: "after", runValidators: true }
+  );
+  if (!note) return res.status(404).json({ message: "Nota no encontrada" });
+  res.json(note);
+});
+
+// DELETE /api/notes/:id  → borrar una nota mía
+router.delete("/:id", checkId, async (req, res) => {
+  const note = await Note.findOneAndDelete({ _id: req.params.id, user: req.userId });
+  if (!note) return res.status(404).json({ message: "Nota no encontrada" });
+  res.status(204).send();
 });
 
 export default router;
