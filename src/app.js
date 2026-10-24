@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
+import notesRoutes from "./routes/notes.js";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/notes", notesRoutes);
 
 // Rutas que no existen
 app.use((req, res) => {
