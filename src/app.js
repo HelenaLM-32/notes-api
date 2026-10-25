@@ -4,6 +4,7 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import authRoutes from "./routes/auth.js";
 import notesRoutes from "./routes/notes.js";
+import docsRoutes from "./docs.js";
 
 const app = express();
 
@@ -38,11 +39,17 @@ app.use("/api", apiLimiter);
 app.use("/api/auth/login", authLimiter);
 app.use("/api/auth/register", authLimiter);
 
+// La portada redirige a la documentación
+app.get("/", (req, res) => {
+  res.redirect("/api/docs");
+});
+
 // Ruta de prueba para comprobar que el servidor responde
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
+app.use("/api", docsRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoutes);
 
