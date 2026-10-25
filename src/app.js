@@ -5,6 +5,7 @@ import rateLimit from "express-rate-limit";
 import authRoutes from "./routes/auth.js";
 import notesRoutes from "./routes/notes.js";
 import docsRoutes from "./docs.js";
+import { connectDB } from "./db.js";
 
 const app = express();
 
@@ -49,9 +50,16 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
+// En Vercel no hay "arranque" del servidor: nos aseguramos de que la base de datos
+// esté conectada antes de atender las rutas que la necesitan.
+async function ensureDb(req, res, next) {
+  await connectDB();
+  next();
+}
+
 app.use("/api", docsRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/notes", notesRoutes);
+app.use("/api/auth", ensureDb, authRoutes);
+app.use("/api/notes", ensureDb, notesRoutes);
 
 // Rutas que no existen
 app.use((req, res) => {
