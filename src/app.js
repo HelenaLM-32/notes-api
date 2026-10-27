@@ -44,7 +44,7 @@ app.use("/api/auth/register", authLimiter);
 
 app.use(express.static(publicDirectory));
 
-// La portada muestra la aplicación y el manual HTML está en /manual.html.
+// La portada incluye la aplicación y su guía dentro del escritorio.
 app.get("/", (req, res) => {
   res.sendFile(path.join(publicDirectory, "index.html"));
 });
