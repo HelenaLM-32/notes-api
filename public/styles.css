@@ -1,0 +1,772 @@
+/* Colores compartidos por el escritorio y las ventanas. */
+:root {
+  font-family: Tahoma, "Segoe UI", sans-serif;
+  color: #111;
+  background: #35afa4;
+  --desktop: #35afa4;
+  --window: #c6c6c6;
+  --blue: #101b8f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Escritorio e iconos. */
+.desktop-screen {
+  height: 100vh;
+  min-height: 480px;
+  overflow: hidden;
+  background: var(--desktop);
+}
+
+.desktop-surface {
+  position: relative;
+  height: calc(100% - 36px);
+  overflow: hidden;
+  background: var(--desktop);
+}
+
+.desktop-icons {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.desktop-icon {
+  display: flex;
+  width: 76px;
+  min-height: 68px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: white;
+  font-size: 10px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 1px 1px #216c66;
+}
+
+.desktop-icon:hover,
+.desktop-icon:focus-visible {
+  border: 1px dotted white;
+  outline: 0;
+  background: #ffffff22;
+}
+
+.icon-art {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  font-size: 30px;
+}
+
+/* Ventanas con una barra de título azul, como las de un escritorio clásico. */
+.window-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.retro-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #111;
+  background: var(--window);
+  box-shadow: 2px 3px 4px #0004;
+  pointer-events: auto;
+}
+
+.titlebar {
+  display: flex;
+  min-height: 23px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 5px;
+  background: linear-gradient(90deg, var(--blue), #2864b9);
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.welcome-window {
+  top: 7%;
+  left: 14%;
+  width: min(474px, 71vw);
+  min-height: 290px;
+}
+
+.welcome-content {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 118px 1fr;
+  gap: 15px;
+  padding: 18px;
+}
+
+.welcome-aside {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 7px;
+  border-right: 1px solid #999;
+  color: #444;
+  font-size: 10px;
+  text-align: center;
+}
+
+.welcome-aside strong {
+  color: #111;
+  font-size: 12px;
+}
+
+.key-icon {
+  font-size: 34px;
+}
+
+.welcome-main {
+  min-width: 0;
+}
+
+.welcome-intro {
+  margin: 2px 0 12px;
+  font-size: 11px;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.auth-tab,
+.classic-button {
+  min-height: 24px;
+  padding: 4px 10px;
+  border: 1px solid;
+  border-color: white #666 #666 white;
+  border-radius: 0;
+  background: var(--window);
+  color: #111;
+  font-size: 10px;
+}
+
+.auth-tab.is-active {
+  border-color: #555 white white #555;
+  background: #b7c8e3;
+}
+
+.classic-button:active,
+.auth-tab:active {
+  border-color: #555 white white #555;
+}
+
+#auth-form {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  align-items: center;
+  gap: 9px 5px;
+}
+
+#auth-form label {
+  font-size: 10px;
+}
+
+#auth-form input,
+.note-title-input,
+.note-content-input {
+  width: 100%;
+  border: 1px solid;
+  border-color: #777 white white #777;
+  border-radius: 0;
+  background: white;
+  color: #111;
+}
+
+#auth-form input {
+  height: 23px;
+  padding: 3px 5px;
+  font-size: 11px;
+}
+
+.form-message {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #9c1717;
+  font-size: 10px;
+}
+
+.primary-button {
+  grid-column: 2;
+  justify-self: end;
+  min-width: 82px;
+}
+
+.password-hint {
+  margin: 12px 0 0;
+  color: #555;
+  font-size: 9px;
+}
+
+.control-button {
+  width: 18px;
+  height: 17px;
+  padding: 0;
+  border: 1px solid;
+  border-color: white #333 #333 white;
+  border-radius: 0;
+  background: var(--window);
+  font: bold 12px Arial, sans-serif;
+}
+
+/* Carpeta y lista de notas. */
+.explorer-window {
+  top: 24%;
+  left: 29%;
+  width: min(570px, 67vw);
+  height: min(390px, 68vh);
+  min-height: 235px;
+}
+
+.explorer-toolbar {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 8px;
+  border-bottom: 1px solid #999;
+  font-size: 10px;
+}
+
+.address-box {
+  flex: 1;
+  padding: 4px 7px;
+  border: 1px solid;
+  border-color: #777 white white #777;
+  background: white;
+  font-family: monospace;
+}
+
+.explorer-list {
+  display: grid;
+  flex: 1;
+  align-content: start;
+  grid-template-columns: repeat(auto-fill, minmax(94px, 1fr));
+  gap: 8px;
+  overflow: auto;
+  padding: 12px;
+  background: white;
+}
+
+.explorer-item {
+  display: grid;
+  min-height: 70px;
+  justify-items: center;
+  gap: 3px;
+  padding: 5px;
+  border: 1px solid transparent;
+  background: white;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+.explorer-item:hover {
+  border: 1px dotted #111;
+  background: #e6ecf6;
+}
+
+.explorer-item-icon {
+  color: #b59c22;
+  font-size: 28px;
+}
+
+.empty-folder {
+  grid-column: 1 / -1;
+  align-self: center;
+  color: #555;
+  font-size: 11px;
+  text-align: center;
+}
+
+.explorer-status {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 8px;
+  border-top: 1px solid #999;
+  color: #444;
+  font-size: 9px;
+}
+
+/* Editor de una nota. */
+.note-window {
+  top: 16%;
+  left: 50%;
+  width: min(440px, 69vw);
+  height: min(390px, 66vh);
+  min-height: 255px;
+  transform: translateX(-50%);
+}
+
+.note-form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  padding: 13px;
+}
+
+.note-title-input {
+  min-height: 27px;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.note-content-input {
+  min-height: 0;
+  flex: 1;
+  resize: none;
+  padding: 7px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.note-form-footer,
+.note-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.note-form-footer {
+  min-height: 28px;
+  color: #555;
+  font-size: 9px;
+}
+
+.delete-note-button {
+  color: #7d1515;
+}
+
+.desktop-message {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  max-width: 80%;
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid #777;
+  background: #ffffd8;
+  box-shadow: 2px 2px #0003;
+  font-size: 11px;
+}
+
+/* Barra inferior. */
+.taskbar {
+  display: flex;
+  height: 36px;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border-top: 1px solid white;
+  background: var(--window);
+}
+
+.start-button {
+  min-height: 27px;
+  font-weight: bold;
+}
+
+.taskbar-manual {
+  color: #172674;
+  font-size: 10px;
+}
+
+.taskbar-spacer {
+  flex: 1;
+}
+
+.system-tray {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px;
+  border: 1px solid;
+  border-color: #888 white white #888;
+  font-size: 10px;
+}
+
+.tray-user {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logout-button {
+  padding: 3px 7px;
+}
+
+/* Sobre el proyecto. */
+.manual-body {
+  min-height: 100vh;
+  padding: 24px;
+  background: var(--desktop);
+}
+
+.manual-window {
+  width: min(960px, 100%);
+  min-height: calc(100vh - 48px);
+  margin: auto;
+  border: 1px solid #111;
+  background: var(--window);
+  box-shadow: 3px 4px 8px #0004;
+}
+
+.manual-titlebar {
+  display: flex;
+  min-height: 28px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  background: linear-gradient(90deg, var(--blue), #2864b9);
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.manual-close {
+  display: grid;
+  place-items: center;
+  color: #111;
+  text-decoration: none;
+}
+
+.manual-content {
+  max-width: 850px;
+  margin: auto;
+  padding: 25px clamp(18px, 5vw, 48px) 40px;
+}
+
+.manual-content h1 {
+  margin: 3px 0 8px;
+  font-size: clamp(24px, 4vw, 34px);
+}
+
+.manual-content h2 {
+  margin: 25px 0 9px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #888;
+  font-size: 19px;
+}
+
+.manual-content h3 {
+  margin: 12px 0 6px;
+  font-size: 13px;
+}
+
+.manual-content p,
+.manual-content li {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.manual-content code {
+  font-family: monospace;
+}
+
+.manual-content p code,
+.manual-content li code {
+  padding: 1px 4px;
+  border: 1px solid #bbb;
+  background: #eee;
+  font-size: 11px;
+}
+
+.manual-back,
+.manual-content a {
+  color: #172674;
+  font-size: 11px;
+}
+
+.manual-kicker {
+  margin: 22px 0 7px;
+  color: #275b54;
+  font: bold 10px monospace;
+  letter-spacing: 1px;
+}
+
+.manual-lead {
+  max-width: 680px;
+  color: #414944;
+  font-size: 14px !important;
+}
+
+.manual-demo-button {
+  display: inline-block;
+  margin: 3px 0 10px;
+  padding: 8px 12px;
+  border: 1px solid;
+  border-color: white #555 #555 white;
+  background: #ddd;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.project-section {
+  margin-top: 25px;
+}
+
+.steps-grid,
+.crud-grid,
+.tech-grid {
+  display: grid;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.steps-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.crud-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.tech-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.step-card,
+.crud-card,
+.tech-card,
+.file-map li {
+  border: 1px solid #999;
+  background: #e7e7e7;
+}
+
+.step-card,
+.tech-card {
+  padding: 12px;
+}
+
+.step-number,
+.crud-letter {
+  display: inline-grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border: 1px solid #777;
+  background: white;
+  font-weight: bold;
+}
+
+.step-card p,
+.crud-card p,
+.tech-card p {
+  margin: 4px 0 0;
+}
+
+.crud-card {
+  display: flex;
+  min-height: 70px;
+  align-items: center;
+  gap: 9px;
+  padding: 9px;
+}
+
+.crud-card h3,
+.tech-card h3 {
+  margin: 0;
+}
+
+.crud-letter {
+  flex: 0 0 25px;
+  color: var(--blue);
+  font-family: monospace;
+}
+
+.tech-label {
+  color: #285d52;
+  font: bold 9px monospace;
+  letter-spacing: 1px;
+}
+
+.project-note {
+  padding: 10px 12px;
+  border: 1px solid #bcae6c;
+  background: #fff8cc;
+}
+
+.file-map {
+  display: grid;
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.file-map li {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 10px;
+  padding: 8px 10px;
+}
+
+.file-map code {
+  color: var(--blue);
+  font-weight: bold;
+}
+
+.manual-footer {
+  margin-top: 24px;
+  padding-top: 10px;
+  border-top: 1px solid #999;
+  color: #555;
+  font-size: 10px;
+}
+
+/* En móvil, las ventanas ocupan casi toda la pantalla. */
+@media (max-width: 700px) {
+  .welcome-window {
+    top: 8%;
+    left: 18%;
+    width: 78vw;
+  }
+
+  .explorer-window {
+    top: 35%;
+    left: 16%;
+    width: 80vw;
+    height: 48vh;
+  }
+
+  .note-window {
+    top: 18%;
+    left: 55%;
+    width: 78vw;
+    height: 58vh;
+  }
+
+  .welcome-content {
+    grid-template-columns: 80px 1fr;
+    gap: 8px;
+    padding: 12px 9px;
+  }
+
+  .steps-grid,
+  .crud-grid,
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .file-map li {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  .manual-body {
+    padding: 0;
+  }
+
+  .manual-window {
+    min-height: 100vh;
+  }
+
+  .manual-content {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
+
+@media (max-width: 430px) {
+  .desktop-screen {
+    min-height: 540px;
+  }
+
+  .desktop-icons {
+    top: 6px;
+    left: 4px;
+  }
+
+  .desktop-icon {
+    width: 62px;
+    min-height: 58px;
+    font-size: 9px;
+  }
+
+  .icon-art {
+    width: 33px;
+    height: 33px;
+  }
+
+  .welcome-window {
+    left: 17%;
+    width: 80vw;
+  }
+
+  .welcome-content {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-aside {
+    display: none;
+  }
+
+  #auth-form {
+    grid-template-columns: 65px 1fr;
+    gap: 7px 4px;
+  }
+
+  .explorer-window {
+    left: 13%;
+    width: 84vw;
+  }
+
+  .explorer-toolbar {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .explorer-toolbar > span,
+  .address-label {
+    display: none;
+  }
+
+  .note-window {
+    left: 55%;
+    width: 82vw;
+  }
+
+  .tray-user {
+    display: none;
+  }
+}

@@ -2,12 +2,14 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import authRoutes from "./routes/auth.js";
 import notesRoutes from "./routes/notes.js";
-import docsRoutes from "./docs.js";
 import { connectDB } from "./db.js";
 
 const app = express();
+const publicDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../public");
 
 // Detrás del proxy de Vercel hay que fiarse de la IP real del visitante
 if (process.env.VERCEL) {
@@ -40,9 +42,11 @@ app.use("/api", apiLimiter);
 app.use("/api/auth/login", authLimiter);
 app.use("/api/auth/register", authLimiter);
 
-// La portada redirige a la documentación
+app.use(express.static(publicDirectory));
+
+// La portada muestra la aplicación y el manual HTML está en /manual.html.
 app.get("/", (req, res) => {
-  res.redirect("/api/docs");
+  res.sendFile(path.join(publicDirectory, "index.html"));
 });
 
 // Ruta de prueba para comprobar que el servidor responde
@@ -57,7 +61,6 @@ async function ensureDb(req, res, next) {
   next();
 }
 
-app.use("/api", docsRoutes);
 app.use("/api/auth", ensureDb, authRoutes);
 app.use("/api/notes", ensureDb, notesRoutes);
 

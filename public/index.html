@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#35afa4">
+    <title>Notas — Escritorio</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main id="desktop-screen" class="desktop-screen">
+      <section class="desktop-surface" aria-label="Escritorio">
+        <div class="desktop-icons" aria-label="Iconos del escritorio">
+          <button class="desktop-icon" id="computer-icon" type="button" aria-label="Ordenador, abrir acceso">
+            <span class="icon-art" aria-hidden="true">🖥️</span>
+            <span>Ordenador</span>
+          </button>
+          <button class="desktop-icon" id="notes-folder-icon" type="button" aria-label="Mis notas, abrir carpeta">
+            <span class="icon-art" aria-hidden="true">📁</span>
+            <span>Mis notas</span>
+          </button>
+          <a class="desktop-icon" href="/manual.html" target="_blank" rel="noopener noreferrer" aria-label="Sobre el proyecto, abrir guía">
+            <span class="icon-art" aria-hidden="true">📖</span>
+            <span>Sobre el proyecto</span>
+          </a>
+        </div>
+
+        <div id="window-layer" class="window-layer">
+          <section id="welcome-window" class="retro-window welcome-window" aria-labelledby="welcome-title">
+            <header class="titlebar">
+              <span id="welcome-title">Bienvenido</span>
+              <button class="control-button" type="button" aria-label="Cerrar" data-close>×</button>
+            </header>
+            <div class="welcome-content">
+              <div class="welcome-aside"><span class="key-icon" aria-hidden="true">🔑</span><strong>Notas</strong><span>Tu pequeño rincón en este ordenador.</span></div>
+              <div class="welcome-main">
+                <p class="welcome-intro">Escribe tus datos para entrar o crear tu cuenta.</p>
+                <div class="auth-tabs" role="tablist" aria-label="Acceso">
+                  <button class="auth-tab is-active" id="login-tab" type="button" role="tab" aria-selected="true">Iniciar sesión</button>
+                  <button class="auth-tab" id="register-tab" type="button" role="tab" aria-selected="false">Registrarme</button>
+                </div>
+                <form id="auth-form">
+                  <label for="email">Correo:</label>
+                  <input id="email" name="email" type="email" autocomplete="email" required>
+                  <label for="password">Contraseña:</label>
+                  <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" required>
+                  <p id="auth-error" class="form-message" role="alert" hidden></p>
+                  <button id="auth-submit" class="classic-button primary-button" type="submit">Entrar</button>
+                </form>
+                <p class="password-hint">La contraseña debe tener al menos 8 caracteres.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="explorer-window" class="retro-window explorer-window" aria-labelledby="explorer-title" hidden>
+            <header class="titlebar">
+              <span id="explorer-title">Mis notas</span>
+              <button class="control-button" type="button" aria-label="Cerrar" data-close>×</button>
+            </header>
+            <div class="explorer-toolbar"><span aria-hidden="true">←</span><span aria-hidden="true">→</span><span class="address-label">Carpeta:</span><div class="address-box">C:\Mis notas</div><button id="explorer-new-note" class="classic-button" type="button">Nueva nota</button></div>
+            <div id="explorer-list" class="explorer-list"></div>
+            <footer class="explorer-status"><span id="explorer-status">0 objetos</span><span>Mis notas</span></footer>
+          </section>
+
+          <div id="note-window-container"></div>
+          <p id="desktop-message" class="desktop-message" role="status" hidden></p>
+        </div>
+      </section>
+
+      <footer class="taskbar">
+        <button id="taskbar-folder" class="start-button" type="button"><span aria-hidden="true">📁</span> Mis notas</button>
+        <a class="taskbar-manual" href="/manual.html" target="_blank" rel="noopener noreferrer">Sobre el proyecto</a>
+        <span class="taskbar-spacer"></span>
+        <div class="system-tray"><span class="tray-user" id="tray-user">Sin iniciar sesión</span><span class="tray-clock" id="clock"></span><button id="logout-button" class="classic-button logout-button" type="button" hidden>Cerrar sesión</button></div>
+      </footer>
+
+      <template id="folder-note-template">
+        <button class="explorer-item" type="button">
+          <span class="explorer-item-icon" aria-hidden="true">▤</span>
+          <span class="note-name"></span>
+        </button>
+      </template>
+      <template id="note-window-template">
+        <section class="retro-window note-window">
+          <header class="titlebar">
+            <span class="note-window-title">Nueva nota</span>
+            <button class="control-button" type="button" aria-label="Cerrar" data-close>×</button>
+          </header>
+          <form class="note-form">
+            <input class="note-title-input" type="text" maxlength="120" placeholder="Título de la nota" aria-label="Título de la nota" required>
+            <textarea class="note-content-input" maxlength="5000" placeholder="Escribe aquí el contenido de tu nota..." aria-label="Contenido de la nota"></textarea>
+            <footer class="note-form-footer">
+              <span class="note-status">Nota nueva</span>
+              <div class="note-buttons">
+                <button class="classic-button delete-note-button" type="button" hidden>Eliminar</button>
+                <button class="classic-button save-note-button" type="submit">Guardar</button>
+              </div>
+            </footer>
+          </form>
+        </section>
+      </template>
+    </main>
+  </body>
+</html>
