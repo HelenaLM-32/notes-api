@@ -7,6 +7,7 @@ let messageTimer;
 
 const welcomeWindow = document.querySelector("#welcome-window");
 const folderWindow = document.querySelector("#explorer-window");
+const manualWindow = document.querySelector("#manual-window");
 const noteWindows = document.querySelector("#note-window-container");
 const noteList = document.querySelector("#explorer-list");
 const message = document.querySelector("#desktop-message");
@@ -270,8 +271,10 @@ document
   .querySelector("#notes-folder-icon")
   .addEventListener("click", openFolder);
 document
-  .querySelector("#taskbar-folder")
-  .addEventListener("click", openFolder);
+  .querySelector("#manual-icon")
+  .addEventListener("click", () => {
+    manualWindow.hidden = false;
+  });
 document
   .querySelector("#explorer-new-note")
   .addEventListener("click", () => openNote());
