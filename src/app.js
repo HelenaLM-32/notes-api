@@ -1,5 +1,4 @@
 import express from "express";
-import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import path from "node:path";
@@ -17,7 +16,6 @@ if (process.env.VERCEL) {
 }
 
 app.use(helmet());
-app.use(cors());
 app.use(express.json({ limit: "10kb" }));
 
 // Límite general: 100 peticiones cada 15 minutos por IP

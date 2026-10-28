@@ -21,16 +21,31 @@ async function api(path, options = {}) {
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch(`/api${path}`, { ...options, headers });
+  const requestToken = token;
+  let response;
+  try {
+    response = await fetch(`/api${path}`, { ...options, headers });
+  } catch {
+    throw new Error("No se pudo conectar con el servidor. Comprueba tu conexión e inténtalo de nuevo.");
+  }
+
   if (response.status === 204) return null;
 
-  const result = await response.json();
+  let result;
+  try {
+    result = await response.json();
+  } catch {
+    throw new Error("El servidor devolvió una respuesta inesperada. Inténtalo de nuevo más tarde.");
+  }
+
   if (!response.ok) {
-    if (response.status === 401) {
-      localStorage.removeItem(TOKEN_KEY);
-      token = null;
+    if (response.status === 401 && requestToken && token === requestToken) {
+      const sessionMessage = "Tu sesión ha caducado. Inicia sesión de nuevo.";
+      logout();
+      showMessage(sessionMessage);
+      throw new Error(sessionMessage);
     }
-    throw new Error(result.message || "Ha ocurrido un error");
+    throw new Error(result?.message || "Ha ocurrido un error");
   }
   return result;
 }
@@ -283,6 +298,20 @@ document.querySelectorAll("[data-close]").forEach((button) => {
   button.addEventListener("click", () => {
     button.closest(".retro-window").hidden = true;
   });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+
+  const openWindows = [...document.querySelectorAll(".retro-window")]
+    .filter((window) => !window.hidden);
+  const topWindow = openWindows.at(-1);
+  const closeButton = topWindow?.querySelector("[data-close]");
+
+  if (closeButton) {
+    event.preventDefault();
+    closeButton.click();
+  }
 });
 
 function logout() {
