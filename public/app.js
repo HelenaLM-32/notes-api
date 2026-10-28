@@ -6,6 +6,7 @@ let notes = [];
 let messageTimer;
 
 const welcomeWindow = document.querySelector("#welcome-window");
+const computerWindow = document.querySelector("#computer-window");
 const folderWindow = document.querySelector("#explorer-window");
 const manualWindow = document.querySelector("#manual-window");
 const noteWindows = document.querySelector("#note-window-container");
@@ -280,7 +281,7 @@ function openNote(note = null) {
 document
   .querySelector("#computer-icon")
   .addEventListener("click", () => {
-    welcomeWindow.hidden = false;
+    computerWindow.hidden = false;
   });
 document
   .querySelector("#notes-folder-icon")

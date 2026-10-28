@@ -129,6 +129,71 @@ a {
   min-height: 290px;
 }
 
+.computer-window {
+  top: 20%;
+  left: 50%;
+  width: min(450px, 76vw);
+  transform: translateX(-50%);
+}
+
+.computer-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 20px;
+}
+
+.computer-icon {
+  font-size: 44px;
+}
+
+.computer-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.computer-details h1 {
+  margin: 0 0 5px;
+  font-size: 15px;
+}
+
+.computer-description {
+  margin: 0 0 14px;
+  color: #444;
+  font-size: 10px;
+}
+
+.computer-specs {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  font-size: 10px;
+}
+
+.computer-specs div {
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  gap: 8px;
+}
+
+.computer-specs dt {
+  color: #555;
+}
+
+.computer-specs dd {
+  margin: 0;
+  font-weight: bold;
+}
+
+.computer-notice {
+  margin: 15px 0 0;
+  padding: 7px;
+  border: 1px solid #bcae6c;
+  background: #fff8cc;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
 .welcome-content {
   display: grid;
   flex: 1;
@@ -625,6 +690,10 @@ a {
     width: 78vw;
   }
 
+  .computer-window {
+    width: 82vw;
+  }
+
   .explorer-window {
     top: 35%;
     left: 16%;
@@ -693,6 +762,20 @@ a {
   .welcome-window {
     left: 17%;
     width: 80vw;
+  }
+
+  .computer-content {
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .computer-icon {
+    font-size: 34px;
+  }
+
+  .computer-specs div {
+    grid-template-columns: 84px 1fr;
+    gap: 5px;
   }
 
   .welcome-content {
