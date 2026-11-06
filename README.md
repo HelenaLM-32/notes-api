@@ -16,7 +16,7 @@ La guía integrada de la aplicación incluye el [caso de estudio](https://helena
 
 - Registro e inicio de sesión con contraseñas cifradas mediante bcrypt y sesiones JWT.
 - Crear, listar, editar y eliminar notas asociadas a la cuenta autenticada.
-- Interfaz adaptable con ventanas, carpeta de notas y guía integrada del proyecto.
+- Interfaz de escritorio con ventanas, carpeta de notas y guía integrada del proyecto. Está diseñada para pantallas de ordenador de al menos 700 px de ancho.
 - Validación de entradas, límites de frecuencia, cabeceras seguras y respuestas de error coherentes.
 - Pruebas automatizadas de rutas y validaciones, sin requerir una base de datos para ejecutarlas.
 
