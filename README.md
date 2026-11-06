@@ -10,6 +10,8 @@ Aplicación web de notas con un escritorio inspirado en los sistemas clásicos. 
 
 ![Escritorio de Notas con el formulario de acceso y el aviso de uso de la demo](./public/desktop.png)
 
+La guía integrada de la aplicación incluye el [caso de estudio](https://helena-notes-api.vercel.app): reto, proceso, decisiones técnicas y alcance del proyecto.
+
 ## Funcionalidades
 
 - Registro e inicio de sesión con contraseñas cifradas mediante bcrypt y sesiones JWT.
@@ -32,6 +34,7 @@ Aplicación web de notas con un escritorio inspirado en los sistemas clásicos. 
 - Las contraseñas no se devuelven en consultas de usuario. Los correos se normalizan antes de guardarse y se gestiona el conflicto de registros duplicados.
 - Helmet, limitación de peticiones y tamaño máximo del cuerpo JSON reducen riesgos comunes en la API.
 - La interfaz y la API comparten origen. El token se guarda en `localStorage` como simplificación de esta demo, no como recomendación para una aplicación sensible.
+- Como siguiente iteración, ampliaría la cobertura con pruebas de integración contra una base MongoDB de prueba y revisaría el manejo de sesión para un escenario de producción.
 
 ## Ejecutar en local
 

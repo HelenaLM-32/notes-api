@@ -13,7 +13,6 @@
 }
 
 body {
-  min-width: 320px;
   min-height: 100vh;
   margin: 0;
 }
@@ -587,6 +586,89 @@ a {
   font-weight: bold;
 }
 
+.case-study-kicker {
+  margin: 0 0 6px;
+  color: #285d52;
+  font: bold 10px monospace;
+  letter-spacing: 1px;
+}
+
+.case-study h2 {
+  margin-top: 0;
+  border: 0;
+  font-size: clamp(22px, 4vw, 30px);
+}
+
+.case-study-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.case-study-facts div {
+  padding: 10px;
+  border: 1px solid #999;
+  background: #e7e7e7;
+}
+
+.case-study-facts dt {
+  color: #285d52;
+  font: bold 9px monospace;
+  letter-spacing: 0.4px;
+}
+
+.case-study-facts dd {
+  margin: 5px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.project-screenshot {
+  margin: 16px 0 0;
+}
+
+.project-screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #777;
+}
+
+.project-screenshot figcaption {
+  margin-top: 6px;
+  color: #555;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.project-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.project-process-card {
+  padding: 12px;
+  border: 1px solid #999;
+  background: #e7e7e7;
+}
+
+.project-process-card h3 {
+  margin: 10px 0 5px;
+}
+
+.project-process-card p {
+  margin: 0;
+}
+
+.project-highlights {
+  display: grid;
+  gap: 7px;
+  padding-left: 20px;
+}
+
 .project-section {
   margin-top: 25px;
 }
@@ -733,7 +815,12 @@ a {
 
   .steps-grid,
   .crud-grid,
-  .tech-grid {
+  .tech-grid,
+  .project-process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-study-facts {
     grid-template-columns: 1fr;
   }
 

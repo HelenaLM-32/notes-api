@@ -101,6 +101,42 @@
               <p class="manual-lead">Una pequeña aplicación de notas con aspecto de ordenador clásico. Puedes crear una cuenta, guardar tus ideas y volver a ellas cuando quieras.</p>
               <p class="project-links"><a href="https://helena-notes-api.vercel.app" target="_blank" rel="noopener noreferrer">Abrir demo en vivo</a><a href="https://github.com/HelenaLM-32/notes-api" target="_blank" rel="noopener noreferrer">Ver código en GitHub</a></p>
 
+              <section class="project-section case-study" aria-labelledby="case-study-title">
+                <p class="case-study-kicker">CASO DE ESTUDIO · DESARROLLO FULL-STACK</p>
+                <h2 id="case-study-title">De una idea a una aplicación completa.</h2>
+                <p>Diseñé y desarrollé esta aplicación para practicar el recorrido completo de un producto web: desde una interfaz con personalidad hasta una API que valida y guarda los datos de cada cuenta.</p>
+                <dl class="case-study-facts">
+                  <div><dt>MI RESPONSABILIDAD</dt><dd>Diseño y desarrollo full-stack</dd></div>
+                  <div><dt>TECNOLOGÍAS</dt><dd>HTML · CSS · JavaScript · Express · MongoDB</dd></div>
+                  <div><dt>DESPLIEGUE</dt><dd>Vercel · pruebas con Node.js · GitHub Actions</dd></div>
+                </dl>
+                <figure class="project-screenshot">
+                  <img src="/desktop.png" alt="Pantalla de acceso de Notas: escritorio turquesa, iconos clásicos y ventana de inicio de sesión." width="780" height="551" loading="lazy" decoding="async">
+                  <figcaption>La pantalla de acceso presenta la metáfora visual del escritorio y permite iniciar sesión o registrarse.</figcaption>
+                </figure>
+              </section>
+
+              <section class="project-section" aria-labelledby="challenge-title">
+                <h2 id="challenge-title">El reto y el proceso.</h2>
+                <p>El reto fue hacer que la estética de un escritorio clásico resultara reconocible sin perder claridad al crear y organizar notas. Convertí el flujo principal en tres pasos que conectan la experiencia visual con datos persistentes:</p>
+                <div class="project-process-grid">
+                  <article class="project-process-card"><span class="step-number">01</span><h3>Entrar de forma segura</h3><p>Registro y acceso con validación en el servidor, contraseñas protegidas con bcrypt y sesiones mediante JWT.</p></article>
+                  <article class="project-process-card"><span class="step-number">02</span><h3>Explorar el escritorio</h3><p>Una carpeta familiar permite encontrar las notas y abrirlas en ventanas de edición.</p></article>
+                  <article class="project-process-card"><span class="step-number">03</span><h3>Guardar los cambios</h3><p>La interfaz consume una API REST; el servidor asocia cada nota a su cuenta antes de leerla o modificarla.</p></article>
+                </div>
+              </section>
+
+              <section class="project-section" aria-labelledby="learning-title">
+                <h2 id="learning-title">Decisiones y siguiente paso.</h2>
+                <ul class="project-highlights">
+                  <li>Separé interfaz, rutas, middleware y modelos para que las responsabilidades sean fáciles de localizar.</li>
+                  <li>Elegí HTML, CSS y JavaScript sin framework para mantener la interfaz ligera y construir la interacción desde sus fundamentos.</li>
+                  <li>Añadí validación, límites de peticiones, pruebas automatizadas y CI para comprobar cambios antes de integrarlos.</li>
+                  <li>Como siguiente mejora, ampliaría las pruebas de integración con una base de datos de prueba y revisaría una estrategia de sesión con cookies seguras.</li>
+                </ul>
+                <p class="project-note"><strong>Alcance:</strong> es una demo de portfolio. Las pruebas actuales validan rutas y entradas, pero no sustituyen una suite de integración con MongoDB. El token se guarda en <code>localStorage</code> y no debe considerarse una configuración para datos sensibles.</p>
+              </section>
+
               <section class="project-section">
                 <h2>¿Qué puedes hacer?</h2>
                 <p>En el escritorio, abre <strong>Mis notas</strong> para ver tu carpeta. Desde ahí puedes crear notas, abrirlas en ventanas, cambiar su contenido y eliminarlas.</p>
