@@ -570,6 +570,23 @@ a {
   font-size: 14px !important;
 }
 
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 18px;
+}
+
+.project-links a {
+  display: inline-block;
+  padding: 7px 10px;
+  border: 1px solid;
+  border-color: white #666 #666 white;
+  background: var(--window);
+  color: #172674;
+  font-weight: bold;
+}
+
 .project-section {
   margin-top: 25px;
 }

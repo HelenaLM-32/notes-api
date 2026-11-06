@@ -9,7 +9,18 @@ export function requireAuth(req, res, next) {
   }
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    const payload = jwt.verify(token, process.env.JWT_SECRET, {
+      algorithms: ["HS256"],
+    });
+    if (
+      typeof payload !== "object" ||
+      payload === null ||
+      typeof payload.sub !== "string" ||
+      !payload.sub
+    ) {
+      return res.status(401).json({ message: "Token no válido o caducado" });
+    }
+
     req.userId = payload.sub;
     next();
   } catch {

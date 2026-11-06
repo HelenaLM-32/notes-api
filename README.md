@@ -1,12 +1,22 @@
 # Notas — Escritorio
 
-Aplicación web de notas para practicar el registro, el inicio de sesión y las operaciones CRUD desde un escritorio de estilo clásico. Es un proyecto de portfolio y una demo educativa: utiliza datos de prueba y no guardes información personal o confidencial.
+Aplicación web de notas con un escritorio inspirado en los sistemas clásicos. Incluye registro e inicio de sesión, notas privadas con operaciones CRUD y una API REST protegida. Proyecto de portfolio de **Helena López**.
 
-**Demo:** [notes-api-seven-bice.vercel.app](https://notes-api-seven-bice.vercel.app)
+[![CI](https://github.com/HelenaLM-32/notes-api/actions/workflows/ci.yml/badge.svg)](https://github.com/HelenaLM-32/notes-api/actions/workflows/ci.yml)
+
+[**Abrir la demo**](https://helena-notes-api.vercel.app) · [**Ver el código fuente**](https://github.com/HelenaLM-32/notes-api)
 
 ## Capturas
 
 ![Escritorio de Notas con el formulario de acceso y el aviso de uso de la demo](./public/desktop.png)
+
+## Funcionalidades
+
+- Registro e inicio de sesión con contraseñas cifradas mediante bcrypt y sesiones JWT.
+- Crear, listar, editar y eliminar notas asociadas a la cuenta autenticada.
+- Interfaz adaptable con ventanas, carpeta de notas y guía integrada del proyecto.
+- Validación de entradas, límites de frecuencia, cabeceras seguras y respuestas de error coherentes.
+- Pruebas automatizadas de rutas y validaciones, sin requerir una base de datos para ejecutarlas.
 
 ## Tecnologías
 
@@ -16,9 +26,16 @@ Aplicación web de notas para practicar el registro, el inicio de sesión y las 
 - **Autenticación:** bcryptjs para proteger contraseñas y JSON Web Tokens (JWT) para las sesiones.
 - **Despliegue:** Vercel.
 
+## Decisiones técnicas
+
+- Cada consulta de notas se limita al usuario autenticado; no basta con conocer el identificador de otra nota.
+- Las contraseñas no se devuelven en consultas de usuario. Los correos se normalizan antes de guardarse y se gestiona el conflicto de registros duplicados.
+- Helmet, limitación de peticiones y tamaño máximo del cuerpo JSON reducen riesgos comunes en la API.
+- La interfaz y la API comparten origen. El token se guarda en `localStorage` como simplificación de esta demo, no como recomendación para una aplicación sensible.
+
 ## Ejecutar en local
 
-Necesitas Node.js y una base de datos MongoDB accesible.
+Necesitas Node.js 22 o superior y una base de datos MongoDB accesible.
 
 1. Clona el repositorio e instala las dependencias:
 
@@ -28,7 +45,7 @@ Necesitas Node.js y una base de datos MongoDB accesible.
    npm install
    ```
 
-2. Crea un archivo `.env` en la raíz y configura las variables de entorno indicadas abajo.
+2. Copia `.env.example` a `.env` y configura las variables de entorno. El ejemplo usa MongoDB local; puedes sustituirlo por una URI de Atlas.
 3. Inicia la aplicación:
 
    ```bash
@@ -42,10 +59,11 @@ Para iniciar el servidor sin el modo de recarga automática, usa `npm start`.
 Ejecuta los tests de API con:
 
 ```bash
+npm run check
 npm test
 ```
 
-Los tests usan el ejecutor integrado de Node.js y comprueban disponibilidad, validación de registro y protección de rutas sin conectarse a MongoDB.
+`npm run check` comprueba la sintaxis de los módulos del servidor y del navegador. Los tests usan el ejecutor integrado de Node.js y comprueban disponibilidad, validaciones de entrada y protección de rutas sin conectarse a MongoDB.
 
 ## Variables de entorno
 
@@ -65,7 +83,7 @@ PORT=3000
 
 Si el usuario o la contraseña de MongoDB contienen caracteres especiales, codifícalos para que la URI sea válida.
 
-En Vercel, configura `MONGODB_URI` y `JWT_SECRET` para el entorno **Production** y vuelve a desplegar después de modificarlas. No compartas sus valores.
+En Vercel, configura `MONGODB_URI` y `JWT_SECRET` para los entornos que utilices y vuelve a desplegar después de modificarlas. No compartas sus valores.
 
 ## API
 
@@ -101,7 +119,13 @@ Las respuestas de error usan JSON con la propiedad `message`. Las rutas de notas
 ```text
 public/       Interfaz del escritorio y guía del proyecto
 src/app.js    Configuración de Express y rutas de la API
+src/server.js Arranque del servidor local
 src/routes/   Registro, autenticación y operaciones CRUD de notas
 src/models/   Modelos de usuario y nota de Mongoose
 src/db.js     Conexión con MongoDB
+test/         Pruebas de API con node:test
 ```
+
+## Uso seguro de la demo
+
+La demo es pública y educativa. Regístrate con un correo de prueba y una contraseña exclusiva para este sitio. No guardes información personal, confidencial ni contraseñas reales.

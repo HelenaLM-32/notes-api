@@ -7,14 +7,27 @@ import { requireAuth } from "../middleware/auth.js";
 const router = Router();
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_PASSWORD_BYTES = 72;
 
 function validateCredentials(body = {}) {
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return "El cuerpo de la petición debe ser un objeto JSON";
+  }
+
   const { email, password } = body;
-  if (typeof email !== "string" || !EMAIL_REGEX.test(email)) {
+  const normalizedEmail = typeof email === "string" ? email.trim() : "";
+  if (
+    !normalizedEmail ||
+    normalizedEmail.length > 254 ||
+    !EMAIL_REGEX.test(normalizedEmail)
+  ) {
     return "El correo electrónico no es válido";
   }
   if (typeof password !== "string" || password.length < 8) {
     return "La contraseña debe tener al menos 8 caracteres";
+  }
+  if (Buffer.byteLength(password, "utf8") > MAX_PASSWORD_BYTES) {
+    return "La contraseña no puede superar los 72 bytes";
   }
   return null;
 }
@@ -25,14 +38,21 @@ router.post("/register", async (req, res) => {
   if (error) return res.status(400).json({ message: error });
 
   const { email, password } = req.body;
+  const normalizedEmail = email.trim().toLowerCase();
 
-  const exists = await User.findOne({ email: email.toLowerCase() });
+  const exists = await User.findOne({ email: normalizedEmail });
   if (exists) {
     return res.status(409).json({ message: "Ya existe un usuario con ese correo" });
   }
 
   const hashed = await bcrypt.hash(password, 10);
-  const user = await User.create({ email, password: hashed });
+  let user;
+  try {
+    user = await User.create({ email: normalizedEmail, password: hashed });
+  } catch (error) {
+    if (error?.code !== 11000) throw error;
+    return res.status(409).json({ message: "Ya existe un usuario con ese correo" });
+  }
 
   res.status(201).json({ id: user.id, email: user.email });
 });
@@ -45,7 +65,7 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   // El campo password está oculto por defecto, así que lo pedimos con +password
-  const user = await User.findOne({ email: email.toLowerCase() }).select("+password");
+  const user = await User.findOne({ email: email.trim().toLowerCase() }).select("+password");
   const valid = user && (await bcrypt.compare(password, user.password));
 
   // Mismo mensaje si falla el correo o la contraseña, para no dar pistas

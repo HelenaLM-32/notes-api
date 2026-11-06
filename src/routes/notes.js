@@ -9,6 +9,10 @@ const router = Router();
 router.use(requireAuth);
 
 function validateNote(body = {}) {
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return "El cuerpo de la petición debe ser un objeto JSON";
+  }
+
   const { title, content } = body;
   if (typeof title !== "string" || title.trim().length === 0) {
     return "El título es obligatorio";
